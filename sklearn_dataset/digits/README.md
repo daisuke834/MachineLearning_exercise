@@ -4,16 +4,15 @@
 * 10 fold cross validation
 * SVM with Gaussian Kernel
 * Grid Search
-** C: 10
-** Gamma: 8
+  * C: 10
+  * Gamma: 8
 
 ## Time of processing
 * GridSearch (Scratch)
-..* Single Process: 219sec
-..* Multi Process: 75sec
-
+  * Single Process: 219sec
+  * Multi Process: 75sec
 * GridSearch (GridSearchCV)
-..* Multi Process: 70sec
+  * Multi Process: 70sec
 
 # Example of prediction
 Actual Value[Prediction]
