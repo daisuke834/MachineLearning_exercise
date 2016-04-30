@@ -4,8 +4,8 @@
 * 10 fold cross validation
 * SVM with Gaussian Kernel
 * Grid Search
-  * C: 10
-  * Gamma: 8
+  * C: 10 patterns
+  * Gamma: 8 patterns
 
 ## Time of processing
 * GridSearch (Scratch)
