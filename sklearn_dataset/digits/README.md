@@ -8,11 +8,11 @@
 ** Gamma: 8
 
 ## Time of processing
-* GridSearch (Scratch)
-..* Single Process: 219sec
-..* Multi Process: 75sec
-* GridSearch (GridSearchCV)
-..* Multi Process: 70sec
+### GridSearch (Scratch)
+* Single Process: 219sec
+* Multi Process: 75sec
+### GridSearch (GridSearchCV)
+* Multi Process: 70sec
 
 # Example of prediction
 Actual Value[Prediction]
