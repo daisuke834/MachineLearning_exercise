@@ -14,4 +14,6 @@
 * GridSearch (GridSearchCV)
 ** Multi Process: 70sec
 
+# Example of prediction
+Actual Value[Prediction]
 ![result](result.png)
