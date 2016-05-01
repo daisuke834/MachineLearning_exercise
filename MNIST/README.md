@@ -32,4 +32,5 @@
 * Test Results
   * Accuracy=0.943725806452
 
+Actual Value/[Prediction]
 ![SVM_RBF](SVM_RBF.png)

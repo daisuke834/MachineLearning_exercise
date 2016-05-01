@@ -16,5 +16,5 @@
   * Multi Process: 70sec
 
 # Example of prediction
-Actual Value[Prediction]
+Actual Value/[Prediction]
 ![result](result.png)
