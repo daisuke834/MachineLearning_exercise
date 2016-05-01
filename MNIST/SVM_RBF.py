@@ -24,10 +24,11 @@ if __name__ == '__main__':
 	_y = _mnist.target
 	_X = _X[_array_index_rand]
 	_y = _y[_array_index_rand]
-	_X_train = _X[:6000]
-	_y_train = _y[:6000]
-	_X_test = _X[6000:]
-	_y_test = _y[6000:]
+	_num_of_training_set = 6000
+	_X_train = _X[:_num_of_training_set]
+	_y_train = _y[:_num_of_training_set]
+	_X_test = _X[_num_of_training_set:]
+	_y_test = _y[_num_of_training_set:]
 	_X_train_norm, _X_mean, _X_std = Xshaping(_X_train)
 	_X_test_norm = ( _X_test - _X_mean ) / _X_std
 	#_X_train, _X_test, _y_train, _y_test = cross_validation.train_test_split(_X, _y, test_size=0.2, random_state=0)
@@ -38,6 +39,8 @@ if __name__ == '__main__':
 	print 'X(test):', _X_test.shape
 	print 'y(test):', _y_test.shape
 
+	#_C_list = [10**_i for _i in range(1, 3)]
+	#_gamma_list = [10**_i for _i in range(-3, -1)]
 	_C_list = [10**_i for _i in range(-2, 6)]
 	_gamma_list = [10**_i for _i in range(-4, 0)]
 	#_C_list = list(np.logspace(1,3,16))
@@ -47,17 +50,31 @@ if __name__ == '__main__':
 	_param_grid = {'C':_C_list, 'gamma':_gamma_list, 'kernel':['rbf']}
 	_grid = grid_search.GridSearchCV(svm.SVC(), param_grid=_param_grid, verbose=2, n_jobs=4)
 	_grid.fit(_X_train_norm, _y_train)
+	_time_end = time.time()
+	print 'time for learning', (_time_end-_time_start)
+	
 	print 'Best Score='+str(_grid.best_score_)+', Best Parm='+str(_grid.best_params_)
 	_C_maxAccuracy = _grid.best_params_['C']
 	_gamma_maxAccuracy = _grid.best_params_['gamma']
 	_model = _grid.best_estimator_ 
 
-	_time_end = time.time()
-	print 'time for learning', (_time_end-_time_start)
+	_scores = np.ndarray( (len(_C_list), len(_gamma_list) ), dtype=float)
+	for _parameters, _mean_validation_score, _cv_validation_scores in _grid.grid_scores_:
+		print '\t',_parameters, '\t', _mean_validation_score
+		_scores[_C_list.index(_parameters['C']), _gamma_list.index(_parameters['gamma'])] = _mean_validation_score
 
 	_accuracy = metrics.accuracy_score(_model.predict(_X_test_norm), _y_test)
 	print "Test Set: Accuracy="+str(_accuracy)
 	print "Test Set: Error Rate="+str(1.0 - _accuracy)
+	
+	for _gamma_index, _gamma_value in enumerate(_gamma_list):
+		plt.plot(_C_list, _scores[:, _gamma_index], label='Gamma='+str(_gamma_value))
+	plt.title('Accuracy')
+	plt.xscale('log')
+	plt.xlabel('C')
+	plt.ylabel('Gamma')
+	plt.legend()
+	plt.show()
 	
 	_p = np.random.random_integers(0, len(_X_test), 25)
 	_samples = np.array(list(zip(_X_test,_y_test)))[_p]

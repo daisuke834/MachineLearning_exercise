@@ -16,6 +16,8 @@
 * Test Results
   * Accuracy=0.93946875
 
+![Accuracy](SVM_RBF_accuracy.png)
+
 ### Training 2
 * number of features: 28x28 = 784
 * number of training sets: 8000
