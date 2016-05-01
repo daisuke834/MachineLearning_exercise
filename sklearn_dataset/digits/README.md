@@ -6,7 +6,9 @@
 * Grid Search
   * C: 10 patterns
   * Gamma: 8 patterns
-* Accuracy = 0.98219 (SVM Gaussian Kernel)
+* Accuracy = 0.982192543127 (SVM Gaussian Kernel)
+* Error Rate = 0.017807456873 (SVM Gaussian Kernel)
+
 
 ## Time of processing
 * GridSearch (Scratch)
@@ -16,5 +18,5 @@
   * Multi Process: 70sec
 
 # Example of prediction
-Actual Value/[Prediction]
+Actual Value/Prediction
 ![result](result.png)

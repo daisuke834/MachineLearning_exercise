@@ -31,6 +31,7 @@
   * Best Parm={'kernel': 'rbf', 'C': 13.593563908785255, 'gamma': 0.00085769589859089463}
 * Test Results
   * Accuracy=0.943725806452
+  * Error Rate=0.056274193548
 
-Actual Value/[Prediction]
+Actual Value/Prediction
 ![SVM_RBF](SVM_RBF.png)

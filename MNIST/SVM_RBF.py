@@ -57,6 +57,7 @@ if __name__ == '__main__':
 
 	_accuracy = metrics.accuracy_score(_model.predict(_X_test_norm), _y_test)
 	print "Test Set: Accuracy="+str(_accuracy)
+	print "Test Set: Error Rate="+str(1.0 - _accuracy)
 	
 	_p = np.random.random_integers(0, len(_X_test), 25)
 	_samples = np.array(list(zip(_X_test,_y_test)))[_p]
