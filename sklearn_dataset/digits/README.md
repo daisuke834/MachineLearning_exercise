@@ -6,6 +6,7 @@
 * Grid Search
   * C: 10 patterns
   * Gamma: 8 patterns
+* Accuracy = 0.98219 (SVM Gaussian Kernel)
 
 ## Time of processing
 * GridSearch (Scratch)
