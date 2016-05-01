@@ -40,6 +40,8 @@ if __name__ == '__main__':
 
 	_C_list = [10**_i for _i in range(-2, 6)]
 	_gamma_list = [10**_i for _i in range(-4, 0)]
+	#_C_list = list(np.logspace(1,3,16))
+	#_gamma_list = list(np.logspace(-4,-2,16))
 	#_C_list = [10000]
 	#_gamma_list = [0.01]
 	_param_grid = {'C':_C_list, 'gamma':_gamma_list, 'kernel':['rbf']}
