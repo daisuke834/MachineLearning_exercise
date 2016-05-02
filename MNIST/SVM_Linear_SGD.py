@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
 from sklearn import datasets
-from sklearn import svm
+from sklearn import linear_model
 from sklearn import cross_validation
 from sklearn import metrics
 from sklearn import grid_search
@@ -19,12 +19,7 @@ if __name__ == '__main__':
 	_y = _mnist.target
 	_X = _X[_array_index_rand]
 	_y = _y[_array_index_rand]
-	#_X_train, _X_test, _y_train, _y_test = cross_validation.train_test_split(_X, _y, test_size=0.2, random_state=0)
-	_num_of_training_set = 8000
-	_X_train = _X[:_num_of_training_set]
-	_y_train = _y[:_num_of_training_set]
-	_X_test = _X[_num_of_training_set:]
-	_y_test = _y[_num_of_training_set:]
+	_X_train, _X_test, _y_train, _y_test = cross_validation.train_test_split(_X, _y, test_size=0.2, random_state=0)
 	_scaler = preprocessing.StandardScaler()
 	_scaler.fit(_X_train)
 	_X_train_norm = _scaler.transform(_X_train)
@@ -36,21 +31,22 @@ if __name__ == '__main__':
 	print 'X(test):', _X_test.shape
 	print 'y(test):', _y_test.shape
 
-	_C_list = list(np.logspace(-4,3,15))
-	_param_grid = {'C':_C_list}
-	_grid = grid_search.GridSearchCV(svm.LinearSVC(), param_grid=_param_grid, verbose=2, n_jobs=4)
+	_C_list = np.logspace(-2,5,15)
+	_lambda_list = list(1.0/_C_list)
+	_param_grid = {'alpha':_lambda_list, 'n_iter':[20]}
+	_grid = grid_search.GridSearchCV(linear_model.SGDClassifier(), param_grid=_param_grid, verbose=2, n_jobs=4)
 	_grid.fit(_X_train_norm, _y_train)
 	_time_end = time.time()
 	print 'time for learning', (_time_end-_time_start)
 	
 	print 'Best Score='+str(_grid.best_score_)+', Best Parm='+str(_grid.best_params_)
-	_C_maxAccuracy = _grid.best_params_['C']
+	_lambda_maxAccuracy = _grid.best_params_['alpha']
 	_model = _grid.best_estimator_ 
 
-	_scores = np.ndarray( (len(_C_list)), dtype=float)
+	_scores = np.ndarray( (len(_lambda_list)), dtype=float)
 	for _parameters, _mean_validation_score, _cv_validation_scores in _grid.grid_scores_:
 		print '\t',_parameters, '\t', _mean_validation_score
-		_scores[_C_list.index(_parameters['C'])] = _mean_validation_score
+		_scores[_lambda_list.index(_parameters['alpha'])] = _mean_validation_score
 
 	_accuracy = metrics.accuracy_score(_model.predict(_X_test_norm), _y_test)
 	print "Test Set: Accuracy="+str(_accuracy)
