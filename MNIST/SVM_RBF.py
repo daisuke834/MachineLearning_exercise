@@ -24,7 +24,7 @@ if __name__ == '__main__':
 	_y = _mnist.target
 	_X = _X[_array_index_rand]
 	_y = _y[_array_index_rand]
-	_num_of_training_set = 6000
+	_num_of_training_set = 8000
 	_X_train = _X[:_num_of_training_set]
 	_y_train = _y[:_num_of_training_set]
 	_X_test = _X[_num_of_training_set:]
@@ -41,8 +41,10 @@ if __name__ == '__main__':
 
 	#_C_list = [10**_i for _i in range(1, 3)]
 	#_gamma_list = [10**_i for _i in range(-3, -1)]
-	_C_list = [10**_i for _i in range(-2, 6)]
-	_gamma_list = [10**_i for _i in range(-4, 0)]
+	#_C_list = [10**_i for _i in range(-2, 6)]
+	#_gamma_list = [10**_i for _i in range(-4, 0)]
+	_C_list = list(np.logspace(-2,5,15))
+	_gamma_list = list(np.logspace(-4,-1,7))
 	#_C_list = list(np.logspace(1,3,16))
 	#_gamma_list = list(np.logspace(-4,-2,16))
 	#_C_list = [10000]
@@ -67,15 +69,25 @@ if __name__ == '__main__':
 	print "Test Set: Accuracy="+str(_accuracy)
 	print "Test Set: Error Rate="+str(1.0 - _accuracy)
 	
+	plt.subplot(1, 2, 1)
 	for _gamma_index, _gamma_value in enumerate(_gamma_list):
 		plt.plot(_C_list, _scores[:, _gamma_index], label='Gamma='+str(_gamma_value))
-	plt.title('Accuracy')
+	plt.title('Accuracy at Test Set')
 	plt.xscale('log')
 	plt.xlabel('C')
-	plt.ylabel('Gamma')
-	plt.legend()
+	plt.ylabel('Accuracy at Test Set')
+	plt.legend(loc='lower right')
+
+	plt.subplot(1, 2, 2)
+	for _C_index, _C_value in enumerate(_C_list):
+		plt.plot(_gamma_list, _scores[_C_index, :], label='C='+str(_C_value))
+	plt.title('Accuracy at Test Set: SVM RBF')
+	plt.xscale('log')
+	plt.xlabel('Gamma')
+	plt.ylabel('Accuracy at Test Set')
+	plt.legend(loc='lower right')
 	plt.show()
-	
+
 	_p = np.random.random_integers(0, len(_X_test), 25)
 	_samples = np.array(list(zip(_X_test,_y_test)))[_p]
 	for _index, (_data, _label) in enumerate(_samples):
