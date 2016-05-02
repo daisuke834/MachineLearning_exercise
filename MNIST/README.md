@@ -1,4 +1,18 @@
 # MNIST
+## Summary
+* SVM Gaussian Kernel (RBF) (Batch Analysis)
+  * time = 81min
+  * Error Rate = 0.0575967741935
+* SVM Linear Kernel (Batch Analysis)
+  * time = 3.7min
+  * Error Rate = 0.114516129032
+* SVM Linear Kernel (Stochastic Gradient Descent)
+  * time = 3.2min
+  * Error Rate = 0.0879285714286
+* Logistic Regression (Batch Analysis)
+  * time = 18min
+  * Error Rate = 0.113532258065
+
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
 * number of features: 28x28 = 784
