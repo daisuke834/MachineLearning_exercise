@@ -1,3 +1,4 @@
+#Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm

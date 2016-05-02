@@ -1,3 +1,4 @@
+#Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
@@ -6,21 +7,15 @@ from sklearn import svm
 from sklearn import cross_validation
 from sklearn import metrics
 from sklearn import grid_search
+from sklearn import preprocessing
 import time
-
-def Xshaping(_X):
-	_X_mean = np.mean(_X, axis=0).reshape(1, -1)
-	_X_std = np.std(_X, axis=0).reshape(1, -1)
-	_X_std[_X_std == 0] = 1
-	_Xnorm = ( _X - _X_mean ) / _X_std
-	return _Xnorm, _X_mean, _X_std
 
 if __name__ == '__main__':
 	_mnist = datasets.fetch_mldata('MNIST original', data_home=".")
 
 	_time_start = time.time()
 	_array_index_rand = np.random.permutation(range(len(_mnist.data)))
-	_X = _mnist.data
+	_X = np.array(_mnist.data, dtype=float)
 	_y = _mnist.target
 	_X = _X[_array_index_rand]
 	_y = _y[_array_index_rand]
@@ -29,8 +24,10 @@ if __name__ == '__main__':
 	_y_train = _y[:_num_of_training_set]
 	_X_test = _X[_num_of_training_set:]
 	_y_test = _y[_num_of_training_set:]
-	_X_train_norm, _X_mean, _X_std = Xshaping(_X_train)
-	_X_test_norm = ( _X_test - _X_mean ) / _X_std
+	_scaler = preprocessing.StandardScaler()
+	_scaler.fit(_X_train)
+	_X_train_norm = _scaler.transform(_X_train)
+	_X_test_norm = _scaler.transform(_X_test)
 	#_X_train, _X_test, _y_train, _y_test = cross_validation.train_test_split(_X, _y, test_size=0.2, random_state=0)
 	print 'X:', _X.shape
 	print 'y:', _y.shape
@@ -94,7 +91,7 @@ if __name__ == '__main__':
 		plt.subplot(5,5,_index+1)
 		plt.axis('off')
 		plt.imshow(_data.reshape(28,28), cmap=cm.gray_r, interpolation='nearest')
-		_predict = _model.predict( ((_data - _X_mean)/_X_std).reshape(1,-1))
+		_predict = _model.predict( _scaler.transform(_data.reshape(1,-1)) )
 		plt.title(str(int(_label))+'/'+str(int(_predict)), color='red')
 	plt.show()
 

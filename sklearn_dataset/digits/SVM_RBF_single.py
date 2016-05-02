@@ -1,3 +1,4 @@
+#Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np

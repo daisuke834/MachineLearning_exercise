@@ -1,3 +1,4 @@
+#Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
@@ -14,12 +15,15 @@ if __name__ == '__main__':
 
 	_time_start = time.time()
 	_array_index_rand = np.random.permutation(range(len(_mnist.data)))
-	_X = _mnist.data
+	_X = np.array(_mnist.data, dtype=float)
 	_y = _mnist.target
 	_X = _X[_array_index_rand]
 	_y = _y[_array_index_rand]
 	_num_of_training_set = 8000
-	_X_train, _X_test, _y_train, _y_test = cross_validation.train_test_split(_X, _y, test_size=0.2, random_state=0)
+	_X_train = _X[:_num_of_training_set]
+	_y_train = _y[:_num_of_training_set]
+	_X_test = _X[_num_of_training_set:]
+	_y_test = _y[_num_of_training_set:]
 	_scaler = preprocessing.StandardScaler()
 	_scaler.fit(_X_train)
 	_X_train_norm = _scaler.transform(_X_train)
@@ -31,7 +35,7 @@ if __name__ == '__main__':
 	print 'X(test):', _X_test.shape
 	print 'y(test):', _y_test.shape
 
-	_C_list = list(np.logspace(-2,5,15))
+	_C_list = list(np.logspace(-4,5,15))
 	_param_grid = {'C':_C_list}
 	_grid = grid_search.GridSearchCV(svm.LinearSVC(), param_grid=_param_grid, verbose=2, n_jobs=4)
 	_grid.fit(_X_train_norm, _y_train)
@@ -64,7 +68,7 @@ if __name__ == '__main__':
 		plt.subplot(5,5,_index+1)
 		plt.axis('off')
 		plt.imshow(_data.reshape(28,28), cmap=cm.gray_r, interpolation='nearest')
-		_predict = _model.predict( _scaler.transform(_data).reshape(1,-1))
+		_predict = _model.predict( _scaler.transform(_data.reshape(1,-1)) )
 		plt.title(str(int(_label))+'/'+str(int(_predict)), color='red')
 	plt.show()
 
