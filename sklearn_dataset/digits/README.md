@@ -1,3 +1,4 @@
+Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # sklearn.datasets.load_digits()
 * number of data sets: 1797
 * number of features: 8x8=64

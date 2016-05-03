@@ -1,3 +1,4 @@
+Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # sklearn.datasets.load_iris()
 * number of data sets: 150
 * number of features: 2
