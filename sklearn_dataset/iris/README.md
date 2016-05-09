@@ -4,16 +4,22 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 * number of features: 2
 * 10 fold cross validation
 * Grid Search
-  * C: 10 patterns
-  * Gamma: 8 patterns (when Gaussian Kernel)
 
 ## Result
 * SVM with Linear Kernel
-  * Time = 2.0sec
-  * Accuracy = 0.93
+  * C: 10 patterns
+  * Time = 0.3sec
+  * Accuracy = 0.926666666667
 * SVM with Gaussian Kernel (RBF)
-  * Time = 2.7sec
-  * Accuracy = 0.96
+  * C: 10 patterns
+  * Gamma: 8 patterns
+  * Time = 1.0sec
+  * Accuracy = 0.959407091141
+* Binary Decision Tree
+  * Max Depth: 20 patterns
+  * Time = 0.3sec
+  * Accuracy = 0.94
 
 ![Linear Kernel](SVM_Linear_single.png)
 ![Gaussian Kernel](SVM_RBF.png)
+![Decision Tree](DecisionTree.png)
