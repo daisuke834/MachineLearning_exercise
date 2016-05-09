@@ -30,6 +30,9 @@ if __name__ == '__main__':
 	_time_end = time.time()
 	print 'time for learning', (_time_end-_time_start)
 
+	tree.export_graphviz(_model, out_file='DecisionTree_tree.dot')
+
+
 	_num_of_graph = len(_X_names) * (len(_X_names) -1) /2
 	_num_of_col_graph = 3
 	_num_of_row_graph = (_num_of_graph+_num_of_col_graph-1)/_num_of_col_graph
