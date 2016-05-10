@@ -81,9 +81,11 @@ if __name__ == '__main__':
 		return ( np.sum(np.argmax(_predictions, 1) == np.argmax(_labels, 1)) / float(_predictions.shape[0]) )
 
 	#***Learning****************************
+	print '*****************************'
+	print 'Start Learning'
 	_time_start = time.time()
-	_alpha_list = [0.1, 0.5, 1.0]
-	_lambda_list = [0.01, 0.1, 1.0, 10.0, 100.0]
+	_alpha_list = np.array([0.1, 0.5, 1.0])
+	_lambda_list = np.array([0.001, 0.01, 0.1, 1.0, 10.0, 100.0])
 	_scores = np.ndarray( (len(_alpha_list), len(_lambda_list) ), dtype=float)
 	with tf.Session(graph=_graph) as _session:
 		_best_accuracy_valid = None
@@ -93,6 +95,7 @@ if __name__ == '__main__':
 			for _lam_index, _lambda in enumerate(_lambda_list):
 				tf.initialize_all_variables().run()
 				for _step in range(_num_steps):
+					_delta=100.0
 					_offset = (_step * _batch_size) % (_num_train_dataset - _batch_size)
 					_batch_data		= _X_train[_offset:(_offset + _batch_size), :]
 					_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
@@ -101,11 +104,11 @@ if __name__ == '__main__':
 					if (_step % 500 == 0):
 						_accuracy_valid = accuracy(_valid_prediction.eval(), _y_valid)
 						if _best_accuracy_valid is None or _accuracy_valid>_best_accuracy_valid:
-							_delta = _accuracy_valid - _best_accuracy_valid
+							if _best_accuracy_valid is not None: _delta = _accuracy_valid - _best_accuracy_valid;
 							_best_accuracy_valid = _accuracy_valid
 							_best_alpha = _alpha
 							_best_lambda = _lambda
-							if _delta < 0.001:	break;
+							if _delta < 0.001: break;
 				_accuracy_valid = accuracy(_valid_prediction.eval(), _y_valid)
 				_scores[_al_index, _lam_index] = _accuracy_valid
 				print 'alpha='+str(_alpha)+',\tlambda='+str(_lambda)+',\tValidAccuracy='+str(_accuracy_valid)
@@ -117,6 +120,8 @@ if __name__ == '__main__':
 			_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
 			_feed_dict = {_tf_X_train : _batch_data, _tf_y_train : _batch_labels, _tf_lambda: _best_lambda, _tf_alpha:_best_alpha}
 			_, _l, _predictions = _session.run([_optimizer, _loss, _train_prediction], feed_dict=_feed_dict)
+		print 'End Learning'
+		print '*****************************'
 		print 'Test accuracy:', accuracy(_test_prediction.eval(), _y_test)
 		_test_predict_final = _test_prediction.eval().copy()
 

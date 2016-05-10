@@ -1,0 +1,31 @@
+X: (70000, 784)
+y: (70000, 10)
+number of points of dataset: 70000
+number of dimension: 784
+number of train dataset: 42000
+number of valid dataset: 14000
+number of test dataset: 14000
+*****************************
+Start Learning
+alpha=0.1,	lambda=0.001,	ValidAccuracy=0.954071428571
+alpha=0.1,	lambda=0.01,	ValidAccuracy=0.947
+alpha=0.1,	lambda=0.1,	ValidAccuracy=0.918785714286
+alpha=0.1,	lambda=1.0,	ValidAccuracy=0.767785714286
+alpha=0.1,	lambda=10.0,	ValidAccuracy=0.116285714286
+alpha=0.1,	lambda=100.0,	ValidAccuracy=0.116285714286
+alpha=0.5,	lambda=0.001,	ValidAccuracy=0.964714285714
+alpha=0.5,	lambda=0.01,	ValidAccuracy=0.964214285714
+alpha=0.5,	lambda=0.1,	ValidAccuracy=0.898857142857
+alpha=0.5,	lambda=1.0,	ValidAccuracy=0.738428571429
+alpha=0.5,	lambda=10.0,	ValidAccuracy=0.116285714286
+alpha=0.5,	lambda=100.0,	ValidAccuracy=0.116285714286
+alpha=1.0,	lambda=0.001,	ValidAccuracy=0.964857142857
+alpha=1.0,	lambda=0.01,	ValidAccuracy=0.952857142857
+alpha=1.0,	lambda=0.1,	ValidAccuracy=0.8855
+alpha=1.0,	lambda=1.0,	ValidAccuracy=0.707785714286
+alpha=1.0,	lambda=10.0,	ValidAccuracy=0.116285714286
+alpha=1.0,	lambda=100.0,	ValidAccuracy=0.116285714286
+End Learning
+*****************************
+Test accuracy: 0.959214285714
+time for learning 7415.77198386

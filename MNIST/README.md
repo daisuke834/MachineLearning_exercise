@@ -1,6 +1,9 @@
 Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # MNIST
 ## Summary
+* Deep Learning (3 layer)
+  * time = 124min
+  * Error Rate = 0.040785714285999974
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
   * time = 81min
   * Error Rate = 0.0575967741935
@@ -13,6 +16,27 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 * Logistic Regression (Batch Analysis)
   * time = 18min
   * Error Rate = 0.113532258065
+
+## 3-layer Deep Learning (Tensor Flow)
+### Lerning Condition
+* number of features: 28x28 = 784
+* number of training sets: 42000
+* number of training sets: 14000
+* number of test sets: 14000
+* Grid Search
+  * Learning Rate: 3 patterns
+  * Lambda: 6 patterns
+
+### Results
+* Validation Results
+  * Time of training = 7416sec (124min)
+  * Best Score=0.964857142857
+  * Best Parm={'alpha':1.0,	'lambda':0.001}
+* Test Results
+  * Accuracy=0.959214285714
+  * Error Rate=0.040785714285999974
+
+![Accuracy 3-layer deep learning](TensorFlow_DeepLearning.png)
 
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
