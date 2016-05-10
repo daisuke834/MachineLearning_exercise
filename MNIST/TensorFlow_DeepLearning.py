@@ -22,7 +22,6 @@ if __name__ == '__main__':
 	_num_of_features = _X.shape[1]
 
 	_num_dataset = len(_X)
-	#_num_dataset = 1000
 	_rand_index = np.random.permutation(_num_dataset)
 	_valid_start_index = int(_num_dataset*0.6)
 	_test_start_index = int(_num_dataset*0.8)
@@ -55,10 +54,10 @@ if __name__ == '__main__':
 	with _graph.as_default():
 		_tf_X_train = tf.placeholder(tf.float32, shape=(_batch_size, _num_of_features))
 		_tf_y_train = tf.placeholder(tf.float32, shape=(_batch_size, _num_labels))
+		
 		_tf_X_valid = tf.constant(_X_valid, dtype=tf.float32)
-		#_tf_y_valid = tf.constant(_y_valid, dtype=tf.float32)
 		_tf_X_test  = tf.constant(_X_test, dtype=tf.float32)
-		#_tf_y_test  = tf.constant(_y_test, dtype=tf.float32)
+		
 		_weights1 = tf.Variable(tf.truncated_normal([_num_of_features, _n_of_hidden_nodes]), dtype=tf.float32)
 		_biases1 = tf.Variable(tf.zeros([_n_of_hidden_nodes]), dtype=tf.float32)
 		_weights2 = tf.Variable(tf.truncated_normal([_n_of_hidden_nodes, _num_labels]), dtype=tf.float32)
@@ -70,7 +69,6 @@ if __name__ == '__main__':
 		_logits = tf.matmul(_hidden_hypo, _weights2) + _biases2
 		_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(_logits, _tf_y_train))+ 0.5 * _tf_lambda * (tf.nn.l2_loss(_weights1) + tf.nn.l2_loss(_weights2))
 
-		#_optimizer = tf.train.GradientDescentOptimizer(0.1).minimize(_loss)
 		_optimizer = tf.train.AdagradOptimizer(_tf_alpha).minimize(_loss)
 
 		_train_prediction = tf.nn.softmax(_logits)
@@ -84,8 +82,8 @@ if __name__ == '__main__':
 	print '*****************************'
 	print 'Start Learning'
 	_time_start = time.time()
-	_alpha_list = np.array([0.1, 0.5, 1.0])
-	_lambda_list = np.array([0.001, 0.01, 0.1, 1.0, 10.0, 100.0])
+	_alpha_list = np.logspace(-2,1,7)
+	_lambda_list = np.logspace(-3,1,9)
 	_scores = np.ndarray( (len(_alpha_list), len(_lambda_list) ), dtype=float)
 	with tf.Session(graph=_graph) as _session:
 		_best_accuracy_valid = None
@@ -121,12 +119,17 @@ if __name__ == '__main__':
 			_feed_dict = {_tf_X_train : _batch_data, _tf_y_train : _batch_labels, _tf_lambda: _best_lambda, _tf_alpha:_best_alpha}
 			_, _l, _predictions = _session.run([_optimizer, _loss, _train_prediction], feed_dict=_feed_dict)
 		print 'End Learning'
+		print 'Validation Best Accuracy:', _best_accuracy_valid
+		print 'Validation Best Error Rate:', (1.0-_best_accuracy_valid)
+		print 'Validation Best Alpha:', _best_alpha
+		print 'Validation Best Lambda:', _best_lambda
 		print '*****************************'
-		print 'Test accuracy:', accuracy(_test_prediction.eval(), _y_test)
+		print 'Test Accuracy:', accuracy(_test_prediction.eval(), _y_test)
+		print 'Test Error Rate:', (1.0-accuracy(_test_prediction.eval(), _y_test))
 		_test_predict_final = _test_prediction.eval().copy()
 
 		_time_end = time.time()
-		print 'time for learning', (_time_end-_time_start)
+		print 'time for learning:', str(_time_end-_time_start) + 'sec\t(' + str((_time_end-_time_start)/60.0) + 'min)'
 
 	plt.subplot(1, 2, 1)
 	for _al_index, _alpha in enumerate(_alpha_list):
