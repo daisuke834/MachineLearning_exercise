@@ -1,7 +1,7 @@
 Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # MNIST
 ## Summary
-* Deep Learning (3 layer)
+* Neural Network (3 layer)
   * time = 124min
   * Error Rate = 0.040785714285999974
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
@@ -17,7 +17,7 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
   * time = 18min
   * Error Rate = 0.113532258065
 
-## 3-layer Deep Learning (Tensor Flow)
+## 3-layer Neural Network (Tensor Flow)
 ### Lerning Condition
 * number of features: 28x28 = 784
 * number of training sets: 42000
