@@ -66,6 +66,7 @@ if __name__ == '__main__':
 		_tf_alpha = tf.placeholder(tf.float32)
 
 		_hidden_hypo = tf.nn.relu(tf.matmul(_tf_X_train, _weights1) + _biases1)
+		_hidden_hypo = tf.nn.dropout(_hidden_hypo,0.5)
 		_logits = tf.matmul(_hidden_hypo, _weights2) + _biases2
 		_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(_logits, _tf_y_train))+ 0.5 * _tf_lambda * (tf.nn.l2_loss(_weights1) + tf.nn.l2_loss(_weights2))
 
@@ -83,7 +84,7 @@ if __name__ == '__main__':
 	print 'Start Learning'
 	_time_start = time.time()
 	_alpha_list = np.logspace(-2,1,7)
-	_lambda_list = np.logspace(-3,1,9)
+	_lambda_list = np.logspace(-5,0,11)
 	_scores = np.ndarray( (len(_alpha_list), len(_lambda_list) ), dtype=float)
 	with tf.Session(graph=_graph) as _session:
 		_best_accuracy_valid = None
@@ -93,7 +94,7 @@ if __name__ == '__main__':
 			for _lam_index, _lambda in enumerate(_lambda_list):
 				tf.initialize_all_variables().run()
 				for _step in range(_num_steps):
-					_delta=100.0
+					#_delta=100.0
 					_offset = (_step * _batch_size) % (_num_train_dataset - _batch_size)
 					_batch_data		= _X_train[_offset:(_offset + _batch_size), :]
 					_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
@@ -102,11 +103,11 @@ if __name__ == '__main__':
 					if (_step % 500 == 0):
 						_accuracy_valid = accuracy(_valid_prediction.eval(), _y_valid)
 						if _best_accuracy_valid is None or _accuracy_valid>_best_accuracy_valid:
-							if _best_accuracy_valid is not None: _delta = _accuracy_valid - _best_accuracy_valid;
+							#if _best_accuracy_valid is not None: _delta = _accuracy_valid - _best_accuracy_valid;
 							_best_accuracy_valid = _accuracy_valid
 							_best_alpha = _alpha
 							_best_lambda = _lambda
-							if _delta < 0.001: break;
+							#if _delta < 0.001: break;
 				_accuracy_valid = accuracy(_valid_prediction.eval(), _y_valid)
 				_scores[_al_index, _lam_index] = _accuracy_valid
 				print 'alpha='+str(_alpha)+',\tlambda='+str(_lambda)+',\tValidAccuracy='+str(_accuracy_valid)
