@@ -1,0 +1,95 @@
+X: (70000, 784)
+y: (70000, 10)
+number of points of dataset: 70000
+number of dimension: 784
+number of train dataset: 42000
+number of valid dataset: 14000
+number of test dataset: 14000
+*****************************
+Start Learning
+alpha=0.01,	lambda=1e-05,	ValidAccuracy=0.925285714286
+alpha=0.01,	lambda=3.16227766017e-05,	ValidAccuracy=0.926785714286
+alpha=0.01,	lambda=0.0001,	ValidAccuracy=0.926357142857
+alpha=0.01,	lambda=0.000316227766017,	ValidAccuracy=0.924928571429
+alpha=0.01,	lambda=0.001,	ValidAccuracy=0.925571428571
+alpha=0.01,	lambda=0.00316227766017,	ValidAccuracy=0.926428571429
+alpha=0.01,	lambda=0.01,	ValidAccuracy=0.925357142857
+alpha=0.01,	lambda=0.0316227766017,	ValidAccuracy=0.9235
+alpha=0.01,	lambda=0.1,	ValidAccuracy=0.9035
+alpha=0.01,	lambda=0.316227766017,	ValidAccuracy=0.857428571429
+alpha=0.01,	lambda=1.0,	ValidAccuracy=0.747857142857
+alpha=0.0316227766017,	lambda=1e-05,	ValidAccuracy=0.950642857143
+alpha=0.0316227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.947714285714
+alpha=0.0316227766017,	lambda=0.0001,	ValidAccuracy=0.949714285714
+alpha=0.0316227766017,	lambda=0.000316227766017,	ValidAccuracy=0.950285714286
+alpha=0.0316227766017,	lambda=0.001,	ValidAccuracy=0.948928571429
+alpha=0.0316227766017,	lambda=0.00316227766017,	ValidAccuracy=0.949785714286
+alpha=0.0316227766017,	lambda=0.01,	ValidAccuracy=0.949642857143
+alpha=0.0316227766017,	lambda=0.0316227766017,	ValidAccuracy=0.949142857143
+alpha=0.0316227766017,	lambda=0.1,	ValidAccuracy=0.9275
+alpha=0.0316227766017,	lambda=0.316227766017,	ValidAccuracy=0.854928571429
+alpha=0.0316227766017,	lambda=1.0,	ValidAccuracy=0.669071428571
+alpha=0.1,	lambda=1e-05,	ValidAccuracy=0.955785714286
+alpha=0.1,	lambda=3.16227766017e-05,	ValidAccuracy=0.957785714286
+alpha=0.1,	lambda=0.0001,	ValidAccuracy=0.9565
+alpha=0.1,	lambda=0.000316227766017,	ValidAccuracy=0.956357142857
+alpha=0.1,	lambda=0.001,	ValidAccuracy=0.955285714286
+alpha=0.1,	lambda=0.00316227766017,	ValidAccuracy=0.957142857143
+alpha=0.1,	lambda=0.01,	ValidAccuracy=0.963357142857
+alpha=0.1,	lambda=0.0316227766017,	ValidAccuracy=0.9305
+alpha=0.1,	lambda=0.1,	ValidAccuracy=0.8795
+alpha=0.1,	lambda=0.316227766017,	ValidAccuracy=0.7755
+alpha=0.1,	lambda=1.0,	ValidAccuracy=0.210857142857
+alpha=0.316227766017,	lambda=1e-05,	ValidAccuracy=0.945071428571
+alpha=0.316227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.944285714286
+alpha=0.316227766017,	lambda=0.0001,	ValidAccuracy=0.946142857143
+alpha=0.316227766017,	lambda=0.000316227766017,	ValidAccuracy=0.950642857143
+alpha=0.316227766017,	lambda=0.001,	ValidAccuracy=0.962428571429
+alpha=0.316227766017,	lambda=0.00316227766017,	ValidAccuracy=0.959214285714
+alpha=0.316227766017,	lambda=0.01,	ValidAccuracy=0.946642857143
+alpha=0.316227766017,	lambda=0.0316227766017,	ValidAccuracy=0.886071428571
+alpha=0.316227766017,	lambda=0.1,	ValidAccuracy=0.819214285714
+alpha=0.316227766017,	lambda=0.316227766017,	ValidAccuracy=0.683928571429
+alpha=0.316227766017,	lambda=1.0,	ValidAccuracy=0.204714285714
+alpha=1.0,	lambda=1e-05,	ValidAccuracy=0.937428571429
+alpha=1.0,	lambda=3.16227766017e-05,	ValidAccuracy=0.934357142857
+alpha=1.0,	lambda=0.0001,	ValidAccuracy=0.943285714286
+alpha=1.0,	lambda=0.000316227766017,	ValidAccuracy=0.950428571429
+alpha=1.0,	lambda=0.001,	ValidAccuracy=0.952142857143
+alpha=1.0,	lambda=0.00316227766017,	ValidAccuracy=0.901428571429
+alpha=1.0,	lambda=0.01,	ValidAccuracy=0.773642857143
+alpha=1.0,	lambda=0.0316227766017,	ValidAccuracy=0.431642857143
+alpha=1.0,	lambda=0.1,	ValidAccuracy=0.113428571429
+alpha=1.0,	lambda=0.316227766017,	ValidAccuracy=0.232428571429
+alpha=1.0,	lambda=1.0,	ValidAccuracy=0.157214285714
+alpha=3.16227766017,	lambda=1e-05,	ValidAccuracy=0.534571428571
+alpha=3.16227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.552285714286
+alpha=3.16227766017,	lambda=0.0001,	ValidAccuracy=0.5335
+alpha=3.16227766017,	lambda=0.000316227766017,	ValidAccuracy=0.459285714286
+alpha=3.16227766017,	lambda=0.001,	ValidAccuracy=0.402428571429
+alpha=3.16227766017,	lambda=0.00316227766017,	ValidAccuracy=0.194428571429
+alpha=3.16227766017,	lambda=0.01,	ValidAccuracy=0.113428571429
+alpha=3.16227766017,	lambda=0.0316227766017,	ValidAccuracy=0.113428571429
+alpha=3.16227766017,	lambda=0.1,	ValidAccuracy=0.113428571429
+alpha=3.16227766017,	lambda=0.316227766017,	ValidAccuracy=0.113428571429
+alpha=3.16227766017,	lambda=1.0,	ValidAccuracy=0.114642857143
+alpha=10.0,	lambda=1e-05,	ValidAccuracy=0.212071428571
+alpha=10.0,	lambda=3.16227766017e-05,	ValidAccuracy=0.146428571429
+alpha=10.0,	lambda=0.0001,	ValidAccuracy=0.227785714286
+alpha=10.0,	lambda=0.000316227766017,	ValidAccuracy=0.221571428571
+alpha=10.0,	lambda=0.001,	ValidAccuracy=0.135142857143
+alpha=10.0,	lambda=0.00316227766017,	ValidAccuracy=0.0998571428571
+alpha=10.0,	lambda=0.01,	ValidAccuracy=0.0999285714286
+alpha=10.0,	lambda=0.0316227766017,	ValidAccuracy=0.0999285714286
+alpha=10.0,	lambda=0.1,	ValidAccuracy=0.0999285714286
+alpha=10.0,	lambda=0.316227766017,	ValidAccuracy=0.0999285714286
+alpha=10.0,	lambda=1.0,	ValidAccuracy=0.0999285714286
+End Learning
+Validation Best Accuracy: 0.963357142857
+Validation Best Error Rate: 0.0366428571429
+Validation Best Alpha: 0.1
+Validation Best Lambda: 0.01
+*****************************
+Test Accuracy: 0.965571428571
+Test Error Rate: 0.0344285714286
+time for learning: 2797.2286799sec	(46.6204779983min)

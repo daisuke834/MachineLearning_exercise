@@ -2,12 +2,12 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from sklearn import datasets
-from sklearn import preprocessing
 import time
 
 
 if __name__ == '__main__':
 	_num_labels=10
+	_pixel_depth = 255.0
 	_mnist = datasets.fetch_mldata('MNIST original', data_home=".")
 	_array_index_rand = np.random.permutation(range(len(_mnist.data)))
 	_X = np.array(_mnist.data, dtype=float)
@@ -33,11 +33,9 @@ if __name__ == '__main__':
 	_y_valid = _y[_rand_index[_valid_start_index:_test_start_index]]
 	_X_test = _X[_rand_index[_test_start_index:]]
 	_y_test = _y[_rand_index[_test_start_index:]]
-	_scaler = preprocessing.StandardScaler()
-	_scaler.fit(_X_train)
-	_X_train = _scaler.transform(_X_train)
-	_X_valid = _scaler.transform(_X_valid)
-	_X_test = _scaler.transform(_X_test)
+	_X_train = _X_train/_pixel_depth
+	_X_valid = _X_valid/_pixel_depth
+	_X_test = _X_test/_pixel_depth
 	_num_train_dataset = len(_X_train)
 	_num_valid_dataset = len(_X_valid)
 	_num_test_dataset = len(_X_test)
