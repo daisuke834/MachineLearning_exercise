@@ -2,8 +2,8 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # MNIST
 ## Summary
 * Neural Network (3 layer)
-  * time = 47min (GPU)
-  * Test Error Rate = 0.0344285714286
+  * time = 48min (GPU)
+  * Test Error Rate = 0.0356428571429
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
   * time = 262min
   * Test Error Rate = 0.0851666666667
@@ -31,14 +31,17 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 
 ### Results
 * Validation Results
-  * Time of training(GPU) = 2797sec (47min)
-  * Best Score=0.963357142857
-  * Best Parm={'alpha':1.0,	'lambda':0.01
+  * Time of training(GPU) = 2908sec (48min)
+  * Best Score=0.965928571429
+  * Best Parm={'alpha':0.1,	'lambda':0.01}
 * Test Results
-  * Accuracy=0.965571428571
-  * Error Rate=0.0344285714286
+  * Accuracy=0.964357142857
+  * Error Rate=0.0356428571429
 
-![Accuracy 3-layer NN](TensorFlow_NN_3.png)
+![Accuracy 3-layer NN](TensorFlow_NN_3_accuracy.png)
+
+Actual Value/Prediction
+![Prediction 3-layer NN](TensorFlow_NN_3_prediction.png)
 
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition

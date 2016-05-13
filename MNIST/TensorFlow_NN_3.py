@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
+from matplotlib import cm
 from sklearn import datasets
 import time
 
@@ -25,17 +26,17 @@ if __name__ == '__main__':
 	_rand_index = np.random.permutation(_num_dataset)
 	_valid_start_index = int(_num_dataset*0.6)
 	_test_start_index = int(_num_dataset*0.8)
-	#_valid_start_index = int(1000)
-	#_test_start_index = int(2000)
+	#_valid_start_index = int(1024)
+	#_test_start_index = int(2048)
 	_X_train = _X[_rand_index[:_valid_start_index]]
 	_y_train = _y[_rand_index[:_valid_start_index]]
 	_X_valid = _X[_rand_index[_valid_start_index:_test_start_index]]
 	_y_valid = _y[_rand_index[_valid_start_index:_test_start_index]]
 	_X_test = _X[_rand_index[_test_start_index:]]
 	_y_test = _y[_rand_index[_test_start_index:]]
-	_X_train = _X_train/_pixel_depth
-	_X_valid = _X_valid/_pixel_depth
-	_X_test = _X_test/_pixel_depth
+	_X_train_norm = _X_train/_pixel_depth
+	_X_valid_norm = _X_valid/_pixel_depth
+	_X_test_norm = _X_test/_pixel_depth
 	_num_train_dataset = len(_X_train)
 	_num_valid_dataset = len(_X_valid)
 	_num_test_dataset = len(_X_test)
@@ -47,14 +48,15 @@ if __name__ == '__main__':
 	#*********Definition ********************
 	_n_of_hidden_nodes = 1024
 	_num_steps = 3001
+	#_num_steps = 11
 	_batch_size = 128
 	_graph = tf.Graph()
 	with _graph.as_default():
 		_tf_X_train = tf.placeholder(tf.float32, shape=(_batch_size, _num_of_features))
 		_tf_y_train = tf.placeholder(tf.float32, shape=(_batch_size, _num_labels))
 		
-		_tf_X_valid = tf.constant(_X_valid, dtype=tf.float32)
-		_tf_X_test  = tf.constant(_X_test, dtype=tf.float32)
+		_tf_X_valid = tf.constant(_X_valid_norm, dtype=tf.float32)
+		_tf_X_test  = tf.constant(_X_test_norm, dtype=tf.float32)
 		
 		_weights1 = tf.Variable(tf.truncated_normal([_num_of_features, _n_of_hidden_nodes]), dtype=tf.float32)
 		_biases1 = tf.Variable(tf.zeros([_n_of_hidden_nodes]), dtype=tf.float32)
@@ -64,8 +66,8 @@ if __name__ == '__main__':
 		_tf_alpha = tf.placeholder(tf.float32)
 
 		_hidden_hypo = tf.nn.relu(tf.matmul(_tf_X_train, _weights1) + _biases1)
-		_hidden_hypo = tf.nn.dropout(_hidden_hypo,0.5)
-		_logits = tf.matmul(_hidden_hypo, _weights2) + _biases2
+		_hidden_hypo_drop = tf.nn.dropout(_hidden_hypo,0.5)
+		_logits = tf.matmul(_hidden_hypo_drop, _weights2) + _biases2
 		_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(_logits, _tf_y_train))+ 0.5 * _tf_lambda * (tf.nn.l2_loss(_weights1) + tf.nn.l2_loss(_weights2))
 
 		_optimizer = tf.train.AdagradOptimizer(_tf_alpha).minimize(_loss)
@@ -94,7 +96,7 @@ if __name__ == '__main__':
 				for _step in range(_num_steps):
 					#_delta=100.0
 					_offset = (_step * _batch_size) % (_num_train_dataset - _batch_size)
-					_batch_data		= _X_train[_offset:(_offset + _batch_size), :]
+					_batch_data		= _X_train_norm[_offset:(_offset + _batch_size), :]
 					_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
 					_feed_dict = {_tf_X_train : _batch_data, _tf_y_train : _batch_labels, _tf_lambda: _lambda, _tf_alpha:_alpha}
 					_, _l, _predictions = _session.run([_optimizer, _loss, _train_prediction], feed_dict=_feed_dict)
@@ -113,7 +115,7 @@ if __name__ == '__main__':
 		tf.initialize_all_variables().run()
 		for _step in range(_num_steps):
 			_offset = (_step * _batch_size) % (_num_train_dataset - _batch_size)
-			_batch_data		= _X_train[_offset:(_offset + _batch_size), :]
+			_batch_data		= _X_train_norm[_offset:(_offset + _batch_size), :]
 			_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
 			_feed_dict = {_tf_X_train : _batch_data, _tf_y_train : _batch_labels, _tf_lambda: _best_lambda, _tf_alpha:_best_alpha}
 			_, _l, _predictions = _session.run([_optimizer, _loss, _train_prediction], feed_dict=_feed_dict)
@@ -147,5 +149,16 @@ if __name__ == '__main__':
 	plt.xlabel('alpha')
 	plt.ylabel('Accuracy at Valid Set')
 	plt.legend(loc='lower right')
+	plt.show()
+
+	_p = np.random.random_integers(0, len(_X_test), 25)
+	_samples = np.array(list(zip(_X_test,_y_test,_test_predict_final)))[_p]
+	for _index, (_data, _y_val_test, _test_predict_final_val) in enumerate(_samples):
+		_label = np.argmax(_y_val_test)
+		_predicted_label = np.argmax(_test_predict_final_val)
+		plt.subplot(5,5,_index+1)
+		plt.axis('off')
+		plt.imshow(_data.reshape(28,28), cmap=cm.gray_r, interpolation='nearest')
+		plt.title(str(int(_label))+'/'+str(int(_predicted_label)), color='red')
 	plt.show()
 
