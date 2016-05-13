@@ -3,19 +3,19 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 ## Summary
 * Neural Network (3 layer)
   * time = 47min (GPU)
-  * Error Rate = 0.0344285714286
+  * Test Error Rate = 0.0344285714286
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
-  * time = 81min
-  * Error Rate = 0.0575967741935
+  * time = 262min
+  * Test Error Rate = 0.0851666666667
 * SVM Linear Kernel (Batch Analysis)
-  * time = 3.7min
-  * Error Rate = 0.114516129032
+  * time = 2.0min
+  * Test Error Rate = 0.131366666667
 * SVM Linear Kernel (Stochastic Gradient Descent)
-  * time = 3.2min
-  * Error Rate = 0.0879285714286
+  * time = 2.6min
+  * Test Error Rate = 0.105357142857
 * Logistic Regression (Batch Analysis)
-  * time = 18min
-  * Error Rate = 0.113532258065
+  * time = 5.9min
+  * Test Error Rate = 0.107933333333
 
 ## 3-layer Neural Network (Tensor Flow)
 ### Lerning Condition
@@ -43,22 +43,21 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
 * number of features: 28x28 = 784
-* number of training sets: 8000
-* number of test sets: 62000
-* 3 fold cross validation
+* number of training sets: 20000
+* number of validation sets: 20000
+* number of test sets: 30000
 * Grid Search
   * C: 15 patterns
   * Gamma: 7 patterns
 
 ### Results
 * Training Results
-  * Fitting 3 folds for each of 105 candidates, totalling 315 fits
-  * Time of training = 4854sec (81min)
-  * Best Score=0.935375
-  * Best Parm={'kernel': 'rbf', 'C': 3.1622776601683791, 'gamma': 0.001}
+  * Time of training = 15723sec (262min)
+  * Best Score=0.97475
+  * Best Parm={'kernel': 'rbf', 'C': 3.16227766017, 'gamma': }
 * Test Results
-  * Accuracy=0.942403225806
-  * Error Rate=0.0575967741935
+  * Accuracy=0.914833333333
+  * Error Rate=0.0851666666667
 
 ![Accuracy SVM RBF](SVM_RBF_accuracy.png)
 
@@ -68,21 +67,20 @@ Actual Value/Prediction
 ## SVM Linear Kernel (Batch Analysis)
 ### Lerning Condition
 * number of features: 28x28 = 784
-* number of training sets: 8000
-* number of test sets: 62000
-* 3 fold cross validation
+* number of training sets: 20000
+* number of validation sets: 20000
+* number of test sets: 30000
 * Grid Search
   * C: 15 patterns
 
 ### Results
-* Training Results
-  * Fitting 3 folds for each of 15 candidates, totalling 45 fits
-  * Time of training = 220sec (3.7min)
-  * Best Score=0.878625
-  * Best Parm={'C': 0.0031622776601683794}
+* Validation Results
+  * Time of training = 118sec (2.0min)
+  * Best Score=0.91225
+  * Best Parm={'C': 0.01}
 * Test Results
-  * Accuracy=0.885483870968
-  * Error Rate=0.114516129032
+  * Accuracy=0.868633333333
+  * Error Rate=0.131366666667
 
 ![Accuracy SVM Linear](SVM_Linear_accuracy.png)
 
@@ -92,21 +90,20 @@ Actual Value/Prediction
 ## SVM Linear Kernel (Stochastic Gradient Descent)
 ### Lerning Condition
 * number of features: 28x28 = 784
-* number of training sets: 56000
+* number of training sets: 42000
+* number of validation sets: 14000
 * number of test sets: 14000
-* 3 fold cross validation
 * Grid Search
   * C: 15 patterns
 
 ### Results
 * Training Results
-  * Fitting 3 folds for each of 15 candidates, totalling 45 fits
-  * Time of training = 193sec (3.2min)
-  * Best Score=0.914125
-  * Best Parm={'alpha': 3.1622776601683795e-05, 'n_iter': 20}
+  * Time of training = 154sec (2.6min)
+  * Best Score=0.915571428571
+  * Best Parm={'C': 3162.27766017}
 * Test Results
-  * Accuracy=0.912071428571
-  * Error Rate=0.0879285714286
+  * Accuracy=0.894642857143
+  * Error Rate=0.105357142857
 
 ![Accuracy SVM Linear SGD](SVM_Linear_SGD_accuracy.png)
 
@@ -117,21 +114,21 @@ Actual Value/Prediction
 ## Logistic Regression (Batch Analysis)
 ### Lerning Condition
 * number of features: 28x28 = 784
-* number of training sets: 8000
-* number of test sets: 62000
-* 3 fold cross validation
+* number of training sets: 20000
+* number of validation sets: 20000
+* number of test sets: 30000
 * Grid Search
   * C: 15 patterns
 
 ### Results
 * Training Results
-  * Fitting 3 folds for each of 15 candidates, totalling 45 fits
-  * Time of training = 1082sec (18min)
-  * Best Score=0.880125
-  * Best Parm={'C': 0.10000000000000001}
+  * Time of training = 356sec (5.9min)
+* Validation Results
+  * Best Score=0.9098
+  * Best Parm={'C': 0.316227766017}
 * Test Results
-  * Accuracy=0.886467741935
-  * Error Rate=0.113532258065
+  * Accuracy=0.892066666667
+  * Error Rate=0.107933333333
 
 ![Accuracy LogisticRegression](LogisticRegression_accuracy.png)
 
