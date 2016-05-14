@@ -1,0 +1,23 @@
+X: (70000, 28, 28, 1)
+y: (70000, 10)
+number of points of dataset: 70000
+number of train dataset: 42000
+number of valid dataset: 14000
+number of test dataset: 14000
+*****************************
+Start Learning
+alpha=0.01,	ValidAccuracy=0.962571428571
+alpha=0.0316227766017,	ValidAccuracy=0.978642857143
+alpha=0.1,	ValidAccuracy=0.981142857143
+alpha=0.316227766017,	ValidAccuracy=0.107928571429
+alpha=1.0,	ValidAccuracy=0.0991428571429
+alpha=3.16227766017,	ValidAccuracy=0.0991428571429
+alpha=10.0,	ValidAccuracy=0.0983571428571
+End Learning
+*****************************
+time for learning: 1915.00264192sec	(31.9167106986min)
+Validation Best Accuracy: 0.981142857143
+Validation Best Error Rate: 0.0188571428571
+Validation Best Alpha: 0.1
+Test Accuracy: 0.980642857143
+Test Error Rate: 0.0193571428571

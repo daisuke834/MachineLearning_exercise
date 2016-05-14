@@ -1,6 +1,9 @@
 Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 # MNIST
 ## Summary
+* Convolutional Neural Network (LeNet-5)
+  * time = 32min (GPU)
+  * Test Error Rate = 0.0193571428571
 * Neural Network (3 layer)
   * time = 48min (GPU)
   * Test Error Rate = 0.0356428571429
@@ -16,6 +19,30 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 * Logistic Regression (Batch Analysis)
   * time = 5.9min
   * Test Error Rate = 0.107933333333
+
+## Convolutional Neural Network: LeNet-5 (Tensor Flow)
+### Lerning Condition
+* number of features: 28x28 = 784
+* number of training sets: 42000
+* number of training sets: 14000
+* number of test sets: 14000
+* dropout: 0.5
+* Grid Search
+  * Learning Rate: 7 patterns
+
+### Results
+* Validation Results
+  * Time of training(GPU) = 1915sec (32min)
+  * Best Score=0.981142857143
+  * Best Parm={'alpha':0.1}
+* Test Results
+  * Accuracy=0.980642857143
+  * Error Rate=0.0193571428571
+
+![Accuracy CNN Lenet-5](TensorFlow_CNN_LeNet5_accuracy.png)
+
+Actual Value/Prediction
+![Prediction CNN Lenet-5](TensorFlow_CNN_LeNet5_prediction.png)
 
 ## 3-layer Neural Network (Tensor Flow)
 ### Lerning Condition
