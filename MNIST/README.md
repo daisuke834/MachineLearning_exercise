@@ -7,6 +7,9 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 * Neural Network (3 layer)
   * time = 48min (GPU)
   * Test Error Rate = 0.0356428571429
+* Random Forest
+  * time = 13min
+  * Test Error Rate = 0.0294285714286
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
   * time = 262min
   * Test Error Rate = 0.0851666666667
@@ -24,7 +27,7 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 ### Lerning Condition
 * number of features: 28x28 = 784
 * number of training sets: 42000
-* number of training sets: 14000
+* number of validation sets: 14000
 * number of test sets: 14000
 * dropout: 0.5
 * Grid Search
@@ -48,7 +51,7 @@ Actual Value/Prediction
 ### Lerning Condition
 * number of features: 28x28 = 784
 * number of training sets: 42000
-* number of training sets: 14000
+* number of validation sets: 14000
 * number of test sets: 14000
 * number of hidden node: 1024
 * dropout: 0.5
@@ -69,6 +72,29 @@ Actual Value/Prediction
 
 Actual Value/Prediction
 ![Prediction 3-layer NN](TensorFlow_NN_3_prediction.png)
+
+## Random Forest
+### Lerning Condition
+* number of features: 28x28 = 784
+* number of training sets: 56000
+* number of test sets: 14000
+* 3-fold cross validation
+* Grid Search
+  * n_estimators: [1, 3, 10, 30, 100, 300, 1000]
+
+### Results
+* Validation Results
+  * Time of training = 765sec (12.7min)
+  * Best Score=0.967303571429
+  * Best Parm={'n_estimators': 1000}
+* Test Results
+  * Accuracy=0.970571428571
+  * Error Rate=0.0294285714286
+
+![Accuracy Random Forest](RandomForest_accuracy.png)
+
+Actual Value/Prediction
+![Prediction Random Forest](RandomForest_prediction.png)
 
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
