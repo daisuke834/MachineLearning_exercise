@@ -37,6 +37,7 @@ if __name__ == '__main__':
 	print 'n_estimators:', len(_num_of_tree_list), _num_of_tree_list
 	_param_grid = {'n_estimators':_num_of_tree_list}
 	# Must set n_jobs=1
+	_model = xgb.XGBClassifier()
 	_grid = grid_search.GridSearchCV(xgb.XGBClassifier(), param_grid=_param_grid, verbose=2, n_jobs=1)
 	_grid.fit(_X_train_norm, _y_train)
 	_time_end = time.time()
@@ -55,7 +56,7 @@ if __name__ == '__main__':
 	print "Test Set: Error Rate="+str(1.0 - _test_accuracy)
 
 	plt.plot(_num_of_tree_list, _scores)
-	plt.title('Accuracy at Validation Set: Gradient Boosting')
+	plt.title('Accuracy at Validation Set: xgboost')
 	plt.xscale('log')
 	plt.xlabel('Number of trees')
 	plt.ylabel('Accuracy at Validation Set')
