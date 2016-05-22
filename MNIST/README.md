@@ -10,6 +10,9 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
 * Random Forest
   * time = 13min
   * Test Error Rate = 0.0294285714286
+* Gradient Boosting
+  * time = 104min
+  * Test Error Rate = 0.0547142857143
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
   * time = 262min
   * Test Error Rate = 0.0851666666667
@@ -95,6 +98,29 @@ Actual Value/Prediction
 
 Actual Value/Prediction
 ![Prediction Random Forest](RandomForest_prediction.png)
+
+## Gradient Boosting
+### Lerning Condition
+* number of features: 28x28 = 784
+* number of training sets: 56000
+* number of test sets: 14000
+* 3-fold cross validation
+* Grid Search
+  * n_estimators: [1, 3, 10, 30, 100]
+
+### Results
+* Validation Results
+  * Time of training = 6250sec (104min)
+  * Best Score=0.942357142857
+  * Best Parm={'n_estimators': 100}
+* Test Results
+  * Accuracy=0.945285714286
+  * Error Rate=0.0547142857143
+
+![Accuracy Gradient Boosting](GradientBoosting_accuracy.png)
+
+Actual Value/Prediction
+![Prediction Gradient Boosting](GradientBoosting_prediction.png)
 
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
