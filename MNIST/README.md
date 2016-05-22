@@ -14,8 +14,8 @@ Copyright (C) 2016 Daisuke Hashimoto. All Rights Reserved.
   * time = 104min
   * Test Error Rate = 0.0547142857143
 * SVM Gaussian Kernel (RBF) (Batch Analysis)
-  * time = 262min
-  * Test Error Rate = 0.0851666666667
+  * time = 55min
+  * Test Error Rate = 0.0320161290323
 * SVM Linear Kernel (Batch Analysis)
   * time = 2.0min
   * Test Error Rate = 0.131366666667
@@ -125,21 +125,21 @@ Actual Value/Prediction
 ## SVM Gaussian Kernel (RBF) (Batch Analysis)
 ### Lerning Condition
 * number of features: 28x28 = 784
-* number of training sets: 20000
-* number of validation sets: 20000
-* number of test sets: 30000
+* number of training sets: 8000
+* number of test sets: 62000
+* 3-fold cross validation
 * Grid Search
-  * C: 15 patterns
-  * Gamma: 7 patterns
+  * C: 10 patterns
+  * Gamma: 10 patterns
 
 ### Results
 * Training Results
-  * Time of training = 15723sec (262min)
-  * Best Score=0.97475
-  * Best Parm={'kernel': 'rbf', 'C': 3.16227766017, 'gamma': }
+  * Time of training = 3317sec (55min)
+  * Best Score=0.960875
+  * Best Parm={'C': 10.0, 'gamma': 0.021544346900318822}
 * Test Results
-  * Accuracy=0.914833333333
-  * Error Rate=0.0851666666667
+  * Accuracy=0.967983870968
+  * Error Rate=0.0320161290323
 
 ![Accuracy SVM RBF](SVM_RBF_accuracy.png)
 
