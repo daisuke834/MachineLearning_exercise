@@ -1,0 +1,8 @@
+X: (70000, 28, 28, 1)
+y: (70000, 10)
+number of points of dataset: 70000
+number of train dataset: 56000
+number of valid dataset: 7000
+number of test dataset: 7000
+*****************************
+Start Learning
