@@ -1,23 +1,79 @@
 X: (70000, 28, 28, 1)
 y: (70000, 10)
 number of points of dataset: 70000
-number of train dataset: 42000
-number of valid dataset: 14000
-number of test dataset: 14000
+number of train dataset: 56000
+number of valid dataset: 7000
+number of test dataset: 7000
 *****************************
 Start Learning
-alpha=0.01,	ValidAccuracy=0.962571428571
-alpha=0.0316227766017,	ValidAccuracy=0.978642857143
-alpha=0.1,	ValidAccuracy=0.981142857143
-alpha=0.316227766017,	ValidAccuracy=0.107928571429
-alpha=1.0,	ValidAccuracy=0.0991428571429
-alpha=3.16227766017,	ValidAccuracy=0.0991428571429
-alpha=10.0,	ValidAccuracy=0.0983571428571
+alpha=0.01,	lambda=1e-05,	ValidAccuracy=0.972285714286,	Num_of_errors=194,	Num_of_points=7000
+alpha=0.01,	lambda=3.16227766017e-05,	ValidAccuracy=0.974714285714,	Num_of_errors=177,	Num_of_points=7000
+alpha=0.01,	lambda=0.0001,	ValidAccuracy=0.973714285714,	Num_of_errors=184,	Num_of_points=7000
+alpha=0.01,	lambda=0.000316227766017,	ValidAccuracy=0.971142857143,	Num_of_errors=202,	Num_of_points=7000
+alpha=0.01,	lambda=0.001,	ValidAccuracy=0.967571428571,	Num_of_errors=227,	Num_of_points=7000
+alpha=0.01,	lambda=0.00316227766017,	ValidAccuracy=0.970714285714,	Num_of_errors=205,	Num_of_points=7000
+alpha=0.01,	lambda=0.01,	ValidAccuracy=0.970714285714,	Num_of_errors=205,	Num_of_points=7000
+alpha=0.01,	lambda=0.0316227766017,	ValidAccuracy=0.963857142857,	Num_of_errors=253,	Num_of_points=7000
+alpha=0.01,	lambda=0.1,	ValidAccuracy=0.950142857143,	Num_of_errors=349,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=1e-05,	ValidAccuracy=0.984142857143,	Num_of_errors=111,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.983142857143,	Num_of_errors=118,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.0001,	ValidAccuracy=0.985714285714,	Num_of_errors=100,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.000316227766017,	ValidAccuracy=0.983,	Num_of_errors=119,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.001,	ValidAccuracy=0.982857142857,	Num_of_errors=120,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.00316227766017,	ValidAccuracy=0.983714285714,	Num_of_errors=114,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.01,	ValidAccuracy=0.981142857143,	Num_of_errors=132,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.0316227766017,	ValidAccuracy=0.968714285714,	Num_of_errors=219,	Num_of_points=7000
+alpha=0.0316227766017,	lambda=0.1,	ValidAccuracy=0.952142857143,	Num_of_errors=335,	Num_of_points=7000
+alpha=0.1,	lambda=1e-05,	ValidAccuracy=0.986142857143,	Num_of_errors=97,	Num_of_points=7000
+alpha=0.1,	lambda=3.16227766017e-05,	ValidAccuracy=0.984428571429,	Num_of_errors=109,	Num_of_points=7000
+alpha=0.1,	lambda=0.0001,	ValidAccuracy=0.987142857143,	Num_of_errors=90,	Num_of_points=7000
+alpha=0.1,	lambda=0.000316227766017,	ValidAccuracy=0.988285714286,	Num_of_errors=82,	Num_of_points=7000
+alpha=0.1,	lambda=0.001,	ValidAccuracy=0.986428571429,	Num_of_errors=95,	Num_of_points=7000
+alpha=0.1,	lambda=0.00316227766017,	ValidAccuracy=0.980285714286,	Num_of_errors=138,	Num_of_points=7000
+alpha=0.1,	lambda=0.01,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.1,	lambda=0.0316227766017,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.1,	lambda=0.1,	ValidAccuracy=0.938714285714,	Num_of_errors=429,	Num_of_points=7000
+alpha=0.316227766017,	lambda=1e-05,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.316227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.0001,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.000316227766017,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.001,	ValidAccuracy=0.974857142857,	Num_of_errors=176,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.00316227766017,	ValidAccuracy=0.979142857143,	Num_of_errors=146,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.01,	ValidAccuracy=0.974428571429,	Num_of_errors=179,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.0316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=0.316227766017,	lambda=0.1,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=1.0,	lambda=1e-05,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=1.0,	lambda=3.16227766017e-05,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=1.0,	lambda=0.0001,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=1.0,	lambda=0.000316227766017,	ValidAccuracy=0.840571428571,	Num_of_errors=1116,	Num_of_points=7000
+alpha=1.0,	lambda=0.001,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=1.0,	lambda=0.00316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=1.0,	lambda=0.01,	ValidAccuracy=0.112571428571,	Num_of_errors=6212,	Num_of_points=7000
+alpha=1.0,	lambda=0.0316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=1.0,	lambda=0.1,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=1e-05,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=3.16227766017e-05,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.0001,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.000316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.001,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.00316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.01,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.0316227766017,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=3.16227766017,	lambda=0.1,	ValidAccuracy=0.103571428571,	Num_of_errors=6275,	Num_of_points=7000
+alpha=10.0,	lambda=1e-05,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=3.16227766017e-05,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.0001,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.000316227766017,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.001,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.00316227766017,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.01,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.0316227766017,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
+alpha=10.0,	lambda=0.1,	ValidAccuracy=0.104285714286,	Num_of_errors=6270,	Num_of_points=7000
 End Learning
 *****************************
-time for learning: 1915.00264192sec	(31.9167106986min)
-Validation Best Accuracy: 0.981142857143
-Validation Best Error Rate: 0.0188571428571
+time for learning: 18613.72226sec	(310.228704333min)
+Validation Best Accuracy: 0.988285714286
+Validation Best Error Rate: 0.0117142857143
 Validation Best Alpha: 0.1
-Test Accuracy: 0.980642857143
-Test Error Rate: 0.0193571428571
+Test Accuracy: 0.983
+Test Error Rate: 0.017

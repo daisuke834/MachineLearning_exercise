@@ -48,6 +48,7 @@ if __name__ == '__main__':
 	_num_steps = 3001
 	#_num_steps = 11
 	_batch_size = 128
+	_dummy_batch_labeldata = np.zeros((_batch_size,_num_labels))
 	_patch_size = 5
 	_depth = 16
 	_num_hidden = 64
@@ -59,9 +60,6 @@ if __name__ == '__main__':
 		_tf_X = tf.placeholder(tf.float32, shape=(_batch_size, _image_size, _image_size, 1))
 		_tf_y = tf.placeholder(tf.float32, shape=(_batch_size, _num_labels))
 
-		_tf_X_valid = tf.constant(_X_valid_norm, dtype=tf.float32)
-		_tf_X_test = tf.constant(_X_test_norm, dtype=tf.float32)
-
 		_weights1 = tf.Variable(tf.truncated_normal([_patch_size, _patch_size, 1, _depth], stddev=0.1), dtype=tf.float32)
 		_biases1 = tf.Variable(tf.zeros([_depth]), dtype=tf.float32)
 		_weights2 = tf.Variable(tf.truncated_normal([_patch_size, _patch_size, _depth, _depth], stddev=0.1), dtype=tf.float32)
@@ -71,8 +69,8 @@ if __name__ == '__main__':
 		_weights4 = tf.Variable(tf.truncated_normal([_num_hidden, _num_labels], stddev=0.1), dtype=tf.float32)
 		_biases4 = tf.Variable(tf.constant(1.0, shape=[_num_labels]), dtype=tf.float32)
 
-		def model(_data, _tf_keep_prob):
-			_conv1 = tf.nn.relu(tf.nn.conv2d(_data,  _weights1, strides=[1,1,1,1], padding='SAME') + _biases1)
+		def model():
+			_conv1 = tf.nn.relu(tf.nn.conv2d(_tf_X,  _weights1, strides=[1,1,1,1], padding='SAME') + _biases1)
 			_pool1 = tf.nn.max_pool(_conv1, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
 			_conv2 = tf.nn.relu(tf.nn.conv2d(_pool1, _weights2, strides=[1,1,1,1], padding='SAME') + _biases2)
 			_pool2 = tf.nn.max_pool(_conv2, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
@@ -81,22 +79,25 @@ if __name__ == '__main__':
 			_fully_connect1 = tf.nn.dropout(tf.nn.relu(tf.matmul(_pool2_flat, _weights3)+_biases3), _tf_keep_prob)
 			_read_out = tf.matmul(_fully_connect1, _weights4)+_biases4
 			return _read_out
-		def predict(_data):
-			return tf.nn.softmax(model(_data, 1.0))
+		def predict():
+			return tf.nn.softmax(model())
+		def num_of_errors(_num_of_data):
+			_predicts = tf.slice(tf.argmax(tf.nn.softmax(model()),1), [0], [_num_of_data])
+			_labels = tf.slice(tf.argmax(_tf_y, 1), [0], [_num_of_data])
+			return tf.reduce_sum(tf.cast(tf.not_equal(_predicts, _labels), tf.int32))
 
-		_tf_logits = model(_tf_X, _tf_keep_prob)
+		_tf_logits = model()
 		_tf_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(_tf_logits, _tf_y))
 		_tf_loss_reg = _tf_loss + 0.5 * _tf_lambda * (tf.nn.l2_loss(_weights1) + tf.nn.l2_loss(_weights2) + tf.nn.l2_loss(_weights3) + tf.nn.l2_loss(_weights4))
 		_tf_optimizer = tf.train.AdagradOptimizer(_tf_alpha).minimize(_tf_loss_reg)
 		_tf_prediction = tf.nn.softmax(_tf_logits)
 
-	def accuracy(_predictions, _labels):
-		return ( np.sum(np.argmax(_predictions, 1) == np.argmax(_labels, 1)) / float(_predictions.shape[0]) )
-
 	#***Learning****************************
 	print '*****************************'
 	print 'Start Learning'
 	_time_start = time.time()
+	#_alpha_list = np.array([0.05, 5])
+	#_lambda_list = np.array([0.0000001, 10])
 	_alpha_list = np.logspace(-2,1,7)
 	_lambda_list = np.logspace(-5,-1,9)
 	_scores = np.ndarray( (len(_alpha_list), len(_lambda_list) ), dtype=float)
@@ -110,10 +111,23 @@ if __name__ == '__main__':
 					_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
 					_feed_dict = {_tf_X:_batch_data, _tf_y:_batch_labels, _tf_lambda:_lambda, _tf_alpha:_alpha, _tf_keep_prob:0.5}
 					_, _l, _predictions = _session.run([_tf_optimizer, _tf_loss_reg, _tf_prediction], feed_dict=_feed_dict)
-					_predict_valid = _session.run(predict(_tf_X_valid))
-					_accuracy_valid = accuracy(_predict_valid, _y_valid)
-					_scores[_al_index, _lam_index] = _accuracy_valid
-			print 'alpha='+str(_alpha)+',\tlambda='+str(_lambda)+',\tValidAccuracy='+str(_accuracy_valid)
+				_num_of_errors = 0
+				for _step in range(int((_num_valid_dataset+_batch_size-1)/_batch_size)):
+					_offset = _step * _batch_size
+					_batch_data		= _X_valid_norm[_offset:(_offset + _batch_size), :]
+					_batch_labels	= _y_valid[_offset:(_offset + _batch_size)]
+					_real_batch_size = len(_batch_data)
+					if _real_batch_size != _batch_size:
+						_padding = np.zeros((_batch_size-_real_batch_size, _image_size,_image_size, 1))
+						_batch_data = np.vstack((_batch_data, _padding))
+						_padding = np.zeros((_batch_size-_real_batch_size, _num_labels))
+						_batch_labels = np.vstack((_batch_labels, _padding))
+					_feed_dict = {_tf_X:_batch_data, _tf_y:_batch_labels, _tf_keep_prob:1}
+					_current_num_of_errors = _session.run(num_of_errors(_real_batch_size), feed_dict=_feed_dict)
+					_num_of_errors = _num_of_errors + _current_num_of_errors
+				_accuracy_valid = float(_num_valid_dataset - _num_of_errors) / _num_valid_dataset
+				_scores[_al_index, _lam_index] = _accuracy_valid
+			print 'alpha='+str(_alpha)+',\tlambda='+str(_lambda)+',\tValidAccuracy='+str(_accuracy_valid)+',\tNum_of_errors='+str(_num_of_errors)+',\tNum_of_points='+str(_num_valid_dataset)
 
 	_best_accuracy_valid = None
 	_best_alpha = None
@@ -133,8 +147,25 @@ if __name__ == '__main__':
 			_batch_labels	= _y_train[_offset:(_offset + _batch_size)]
 			_feed_dict = {_tf_X:_batch_data, _tf_y:_batch_labels, _tf_lambda:_best_lambda, _tf_alpha:_best_alpha, _tf_keep_prob:0.5}
 			_, _l, _predictions = _session.run([_tf_optimizer, _tf_loss_reg, _tf_prediction], feed_dict=_feed_dict)
-		_predict_test = _session.run(predict(_tf_X_test))
-		_accuracy_test = accuracy(_predict_test, _y_test)
+		_num_of_errors = 0
+		for _step in range(int((_num_test_dataset+_batch_size-1)/_batch_size)):
+			_offset = _step * _batch_size
+			_batch_data		= _X_test_norm[_offset:(_offset + _batch_size), :]
+			_batch_labels	= _y_test[_offset:(_offset + _batch_size)]
+			_real_batch_size = len(_batch_data)
+			if _real_batch_size != _batch_size:
+				_padding = np.zeros((_batch_size-_real_batch_size, _image_size,_image_size, 1))
+				_batch_data = np.vstack((_batch_data, _padding))
+				_padding = np.zeros((_batch_size-_real_batch_size, _num_labels))
+				_batch_labels = np.vstack((_batch_labels, _padding))
+			_feed_dict = {_tf_X:_batch_data, _tf_y:_batch_labels, _tf_keep_prob:1}
+			_current_num_of_errors = _session.run(num_of_errors(_real_batch_size), feed_dict=_feed_dict)
+			_num_of_errors = _num_of_errors + _current_num_of_errors
+		_accuracy_test = float(_num_test_dataset - _num_of_errors) / _num_test_dataset
+		_p = np.random.random_integers(0, len(_X_test), _batch_size)
+		_batch_data = _X_test_norm[_p]
+		_feed_dict = {_tf_X:_batch_data, _tf_keep_prob:1}
+		_batch_predict = _session.run(predict(), feed_dict=_feed_dict)
 	_time_end = time.time()
 	print 'End Learning'
 	print '*****************************'
@@ -164,11 +195,13 @@ if __name__ == '__main__':
 	plt.legend(loc='lower right')
 	plt.show()
 
-	_p = np.random.random_integers(0, len(_X_test), 25)
-	_samples = np.array(list(zip(_X_test.reshape(-1,_image_size,_image_size),_y_test,_predict_test)))[_p]
-	for _index, (_data, _y_val_test, _predict_test_val) in enumerate(_samples):
-		_label = np.argmax(_y_val_test)
-		_predicted_label = np.argmax(_predict_test_val)
+	_batch_predict		= _batch_predict[:25]
+	_batch_data_origin	= _X_test[_p[:25]]
+	_batch_labels		= _y_test[_p[:25]]
+	for _index in range(25):
+		_label				= np.argmax(_batch_labels[_index])
+		_predicted_label	= np.argmax(_batch_predict[_index])
+		_data = _batch_data_origin[_index].ravel().reshape(_image_size,_image_size)
 		plt.subplot(5,5,_index+1)
 		plt.axis('off')
 		plt.imshow(_data, cmap=cm.gray_r, interpolation='nearest')
